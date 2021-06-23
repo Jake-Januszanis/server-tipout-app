@@ -1,21 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, View, FlatList } from 'react-native';
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
+import Employees from './components/Employees';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView
+    style={styles.container}>
+        <StatusBar style="auto" />
+        <Header />
+        <Dashboard />
+        <Employees />
+      </ScrollView>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'transparent',
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    overflow: 'scroll'
   },
 });
