@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 
 export default function SalesCards() {
 
@@ -20,11 +20,6 @@ export default function SalesCards() {
             value: 6.5,
             id: '3'
         },
-        {
-            title: 'Tips',
-            value: 300,
-            id: '4'
-        }
     ]
 
 
@@ -52,6 +47,8 @@ const styles = StyleSheet.create({
     card: {
         borderColor: 'black',
         borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor: '#ffffff',
         marginHorizontal: 10,
         height: '85%',
         width: 150,

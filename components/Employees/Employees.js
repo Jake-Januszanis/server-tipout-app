@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, Button } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SafeAreaView, Button, Alert } from 'react-native';
 
 export default function Employees() {
 
@@ -17,30 +17,30 @@ export default function Employees() {
             hours: 7.5,
             tipout: '$24.00'
         },
-        // {
-        //     name: 'Shane',
-        //     type: 'support',
-        //     hours: 6.5,
-        //     tipout: '$18.00'
-        // },
-        // {
-        //     name: 'Justin',
-        //     type: 'support',
-        //     hours: 6.5,
-        //     tipout: '$18.00'
-        // },
-        // {
-        //     name: 'Casey',
-        //     type: 'host',
-        //     hours: 6.5,
-        //     tipout: '$7.00'
-        // },
-        // {
-        //     name: 'Sam',
-        //     type: 'host',
-        //     hours: 6.5,
-        //     tipout: '$7.00'
-        // }
+        {
+            name: 'Shane',
+            type: 'support',
+            hours: 6.5,
+            tipout: '$18.00'
+        },
+        {
+            name: 'Justin',
+            type: 'support',
+            hours: 6.5,
+            tipout: '$18.00'
+        },
+        {
+            name: 'Casey',
+            type: 'host',
+            hours: 6.5,
+            tipout: '$7.00'
+        },
+        {
+            name: 'Sam',
+            type: 'host',
+            hours: 6.5,
+            tipout: '$7.00'
+        }
     ]
 
 
@@ -50,12 +50,11 @@ export default function Employees() {
             <Text style={styles.title}>Employees</Text>
             <FlatList
                 data={data}
-                nestedScrollEnabled
                 renderItem = {({ item }) => (
 
-                <View style={styles.card}>
+                <View style={styles.cards}>
                     <View  style={styles.cardTop}>
-                    <Text style={styles.cardTitle}>{item.name}</Text>
+                    <Text style={styles.cardTopTitle}>{item.name}</Text>
                     </View>
                     <View style={styles.cardBottom}>
                         <View style={styles.cardBottomGroup}>
@@ -74,10 +73,14 @@ export default function Employees() {
                     </View>
                 </View>
             )}/>
+            <View style={styles.addBtn}>
             <Button 
             title="Add Employee"
-            color='#77DBC9' 
+            color='#77DBC9'
+            accessibilityLabel='Add new employee with this button'
+            onPress={()=> alert("Add employee button has been clicked")}
             ></Button>
+            </View>
         </SafeAreaView>
     </View>
     )
@@ -87,10 +90,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ECECEC',
-        marginBottom: 50
+        paddingBottom: 20
     },
 
-    card: {
+    title: {
+        fontSize: 40,
+        textAlign: 'center',
+        marginTop: 40,
+    },
+
+    cards: {
         flex: 1,
         borderRadius: 20,
         backgroundColor: '#fff',
@@ -101,6 +110,12 @@ const styles = StyleSheet.create({
     cardTop: {
         flex: 1,
     },
+
+    cardTopTitle:{
+        fontSize: 30,
+        textAlign: 'center',
+    },
+
     cardBottom: {
         flex: 1,
         flexDirection: 'row',
@@ -117,15 +132,8 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
 
-
-    cardTitle:{
-        fontSize: 30,
-        textAlign: 'center',
-        
-    },
-    title: {
-        fontSize: 40,
-        textAlign: 'center',
-        marginTop: 40,
+    addBtn: {
+        marginHorizontal: '30%',
+        marginVertical: '5%'
     }
 })

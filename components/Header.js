@@ -1,16 +1,12 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import CurrentDate from './CurrentDate';
+import CurrentDate from './Utility/CurrentDate';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Header() {
 
-
-    
     return(
-    
-        
         <View style={styles.container}>
             <LinearGradient
                 colors={['#77DBC9', 'transparent']}

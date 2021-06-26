@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, ScrollView, View, FlatList } from 'react-native';
+import { StyleSheet, ScrollView} from 'react-native';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
-import Employees from './components/Employees';
+import Employees from './components/Employees/Employees';
+import DailyReportButton from './components/Reports/DailyReportButton';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Header />
         <Dashboard />
         <Employees />
+        <DailyReportButton />
       </ScrollView>
 
   );

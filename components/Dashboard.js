@@ -2,11 +2,10 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import SalesCards from './SalesCards';
-import SalesUpdateBtn from './SalesUpdateBtn';
-import TipDataCards from './TipDataCards';
-import TipsUpdateBtn from './TipsUpdateBtn';
-import Employees from './Employees';
+import SalesCards from './Sales/SalesCards';
+import SalesUpdateBtn from './Sales/SalesUpdateBtn';
+import TipDataCards from './Tips/TipDataCards';
+import TipsUpdateBtn from './Tips/TipsUpdateBtn';
 
 export default function Dashboard() {
 

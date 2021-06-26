@@ -10,6 +10,7 @@ export default function SalesUpdateBtn() {
             <Button 
                 title='Update Sales'
                 color='#77DBC9'
+                onPress={() => alert('Update Sales Button Pressed')}
                 />
                 </View>
     )
@@ -18,6 +19,6 @@ export default function SalesUpdateBtn() {
 const styles = StyleSheet.create({
     btn: {
         marginHorizontal: 10,
-        marginVertical: 10
+        marginVertical: 10,
     }
 })
