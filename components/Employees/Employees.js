@@ -1,8 +1,11 @@
 
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, Button, Alert } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, StyleSheet, FlatList, SafeAreaView, Button} from 'react-native';
+import AddEmployeeModal from './AddEmployeeModal';
 
 export default function Employees() {
+
+    const [isOpen, setToggle] = useState(false)
 
     const data = [
         {
@@ -78,10 +81,11 @@ export default function Employees() {
             title="Add Employee"
             color='#77DBC9'
             accessibilityLabel='Add new employee with this button'
-            onPress={()=> alert("Add employee button has been clicked")}
+            onPress={()=> setToggle(true)}
             ></Button>
             </View>
         </SafeAreaView>
+        {isOpen ? <AddEmployeeModal isOpen={isOpen} setToggle={setToggle} /> : null}
     </View>
     )
 }

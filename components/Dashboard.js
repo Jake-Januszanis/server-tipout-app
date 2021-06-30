@@ -16,9 +16,9 @@ export default function Dashboard() {
                 colors={['transparent', '#ECECEC']}
                 style={styles.background}
             >
-            <Text style={styles.sectionTitles}>Sales:</Text>
+            <Text style={styles.sectionTitles}>Sales</Text>
                 <SalesCards />
-            <Text style={styles.sectionTitles}>Tips:</Text>
+            <Text style={styles.sectionTitles}>Tips</Text>
                 <TipDataCards />
                     <View style={styles.btnContainer}>
                         <SalesUpdateBtn /> 
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     },
     sectionTitles: {
         fontSize: 40,
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingBottom: 10
     }
 })
