@@ -2,11 +2,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, Modal} from 'react-native';
 
-export default function AddEmployeeModal({isOpen, setToggle}) {
+export default function AddEmployeeModal({isOpen, toggleModal}) {
+
 
     return(
 
-        <View style={styles.container}>
+        <View>
             <Modal
             animationType='fade'
             visible={isOpen}
@@ -14,7 +15,8 @@ export default function AddEmployeeModal({isOpen, setToggle}) {
                 <Text>Add Employee Modal</Text>
                     <Button
                     title='Close Modal'
-                    onPress={() => setToggle(false)}
+                    accessibilityLabel='Click to close modal'
+                    onPress={toggleModal}
                     />
             </Modal>
         </View>
@@ -23,8 +25,4 @@ export default function AddEmployeeModal({isOpen, setToggle}) {
 
 const styles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-        justifyContent: 'center'
-    }
 })

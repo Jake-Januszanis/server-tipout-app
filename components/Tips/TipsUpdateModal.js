@@ -3,7 +3,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Modal, Button} from 'react-native';
 
 
-export default function TipsUpdateModal({isOpen, setToggle}) {
+export default function TipsUpdateModal({isOpen, toggleModal}) {
 
 
     return(
@@ -15,7 +15,7 @@ export default function TipsUpdateModal({isOpen, setToggle}) {
                 <Text>Tips Update Modal</Text>
                 <Button
                     title='Close Modal'
-                    onPress={() => setToggle(false)}
+                    onPress={toggleModal}
                 />
             </Modal>
         </View>

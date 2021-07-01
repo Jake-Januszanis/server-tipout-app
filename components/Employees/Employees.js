@@ -7,6 +7,10 @@ export default function Employees() {
 
     const [isOpen, setToggle] = useState(false)
 
+    const toggleModal = () => {
+        setToggle(!isOpen)
+    }
+
     const data = [
         {
             name: 'Tucker',
@@ -81,11 +85,11 @@ export default function Employees() {
             title="Add Employee"
             color='#77DBC9'
             accessibilityLabel='Add new employee with this button'
-            onPress={()=> setToggle(true)}
+            onPress={toggleModal}
             ></Button>
             </View>
         </SafeAreaView>
-        {isOpen ? <AddEmployeeModal isOpen={isOpen} setToggle={setToggle} /> : null}
+        <AddEmployeeModal isOpen={isOpen} toggleModal={toggleModal}/>
     </View>
     )
 }

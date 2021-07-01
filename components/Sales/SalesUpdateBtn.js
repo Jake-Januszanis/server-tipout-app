@@ -21,7 +21,9 @@ export default function SalesUpdateBtn() {
                 onPress={toggleModal}
                 />
             </View>
-            {isOpen ? <SalesUpdateModal isOpen={isOpen} setToggle={setToggle} /> : null}
+            
+            {/* ***When isOpen is set to true Modal will be displayed */}
+            <SalesUpdateModal isOpen={isOpen} toggleModal={toggleModal} />
         </View>     
     )
 }

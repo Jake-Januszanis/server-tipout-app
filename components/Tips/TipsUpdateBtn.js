@@ -7,16 +7,20 @@ export default function TipsUpdateBtn() {
 
     const [isOpen, setToggle] = useState(false)
 
+    const toggleModal = () => {
+        setToggle(!isOpen)
+    }
+
     return (
         <View>
             <View style={styles.btn}>
             <Button 
                 title='Update Tips'
                 color='#77DBC9'
-                onPress={() => setToggle(true)}
+                onPress={toggleModal}
                 />
             </View>
-            {isOpen ? <TipsUpdateModal isOpen={isOpen} setToggle={setToggle} />: null}
+            <TipsUpdateModal isOpen={isOpen} toggleModal={toggleModal} />
             </View>
     )
 }

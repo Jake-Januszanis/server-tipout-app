@@ -3,19 +3,15 @@ import React from 'react';
 import {View, Text, StyleSheet, Modal, Button } from 'react-native';
 
 
-export default function SalesUpdateModal({isOpen, setToggle}) {
+export default function SalesUpdateModal({isOpen, toggleModal}) {
 
-    const toggleModal = () => {
-        setToggle(!isOpen)
-    }
 
     return (
-    <View style={styles.container}>
+    <View>
         <Modal
         animationType='slide'
-        visable={isOpen}>
+        visible={isOpen}>
             <Text>Update Sales Modal</Text>
-            <Text>{isOpen}</Text>
             <Button
             title='Close Modal'
             onPress={toggleModal}

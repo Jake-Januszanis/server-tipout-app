@@ -3,8 +3,9 @@ import React from 'react';
 import {View, Text, StyleSheet, Modal, Button} from 'react-native';
 
 
-export default function DailyReportModal({isOpen, setToggle}) {
+export default function DailyReportModal({isOpen, toggleModal}) {
 
+    //**toggleModal function imported from Parent Component(DailyReportButton.js)
 
     return (
         <View>
@@ -14,7 +15,7 @@ export default function DailyReportModal({isOpen, setToggle}) {
                 <Text>Daily Report Modal</Text>
                 <Button 
                 title='Close Modal'
-                onPress={() => setToggle(false)}
+                onPress={toggleModal}
                 />
             </Modal>
         </View>
