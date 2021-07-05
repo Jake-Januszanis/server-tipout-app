@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, Text, StyleSheet, Button, Modal, TextInput, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Modal, Pressable} from 'react-native';
 import NewEmployeeForm from './AddEmployeeForm';
 
 export default function AddEmployeeModal({isOpen, toggleModal}) {
