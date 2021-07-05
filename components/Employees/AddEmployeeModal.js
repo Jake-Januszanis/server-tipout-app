@@ -1,28 +1,46 @@
 
 import React from 'react';
-import {View, Text, StyleSheet, Button, Modal} from 'react-native';
+import {View, Text, StyleSheet, Button, Modal, TextInput, Pressable} from 'react-native';
+import NewEmployeeForm from './AddEmployeeForm';
 
 export default function AddEmployeeModal({isOpen, toggleModal}) {
 
 
     return(
 
-        <View>
-            <Modal
-            animationType='fade'
-            visible={isOpen}
-            >
-                <Text>Add Employee Modal</Text>
-                    <Button
-                    title='Close Modal'
-                    accessibilityLabel='Click to close modal'
-                    onPress={toggleModal}
-                    />
-            </Modal>
-        </View>
+    <View>
+        <Modal
+        animationType='fade'
+        visible={isOpen}
+        >
+            <View style={styles.container}>
+                    <Pressable
+                        style={styles.modalButton}
+                        onPressIn={toggleModal}>
+                            <Text style={styles.modalButtonText}>[Close]</Text>
+                    </Pressable>
+                <NewEmployeeForm />
+            </View>
+        </Modal>
+    </View>
     )
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        backgroundColor: '#222',
+    },
+    title: {
+        fontSize: 45,
+        textAlign: 'center',
+        color: '#fff',
+    },
+    modalButton: {
+        width: '25%',
+    },
+    modalButtonText: {
+        fontSize: 30,
+        color: '#fff'
+    }
 })
