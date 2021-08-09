@@ -1,75 +1,128 @@
 
-import React, {useState} from 'react';
+import React, {useState, useContext } from 'react';
+import { useForm, Controller } from 'react-hook-form'
 import {Text, View, Pressable, ScrollView, StyleSheet, TextInput} from 'react-native';
+import { SalesContext } from '../../Context/SalesContext';
 
-export default function SalesUpdateForm() {
-    const [sales, setSales] = useState();
-    const [liquorSales, setLiquorSales] = useState();
-    const [wineSales, setWineSales] = useState();
-    const [foodSales, setFoodSales] = useState();
-    const [beerSales, setBeerSales] = useState();
+export default function SalesUpdateForm({toggleModal}) {
+    
+    const { salesDispatch } = useContext(SalesContext);
+
+    const { handleSubmit, control, formState: {errors} } = useForm();
+    const onSubmit = data => salesDispatch({type: 'addSales', payload: data});
 
     return(
         <ScrollView>
             <View style={styles.container}>
-                <Text style={styles.title}>Edit Sales</Text>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Total Sales</Text>
-                            <TextInput
-                                autoFocus
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setSales(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Food Sales</Text>
-                            <TextInput
-                                style={styles.input}
-                                textAlign= 'center'
-                                keyboardType= 'number-pad'
-                                onChangeText={text => setFoodSales(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Liquor Sales</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setLiquorSales(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Beer Sales</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setBeerSales(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Wine Sales</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setWineSales(text)}
-                            />
-                    </View>
-                    <Pressable
-                        style={styles.submitButton}
-                        onPressIn={() => console.log({
-                            'Total Sales': sales,
-                            'Food Sales': foodSales,
-                            'Liquor Sales': liquorSales,
-                            'Beer Sales': beerSales,
-                            'Wine Sales': wineSales
-                        })}>
-                        <Text style={styles.submitButtonText}>Update</Text>
-                    </Pressable>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Total Sales</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="totalSales"
+                    id='totalSales'
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.totalSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Food Sales</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="foodSales"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.foodSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Liquor Sales</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="liquorSales"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.liquorSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Beer Sales</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="beerSales"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.beerSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Wine Sales</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="wineSales"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.wineSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+            
+            <Pressable
+            style={styles.submitButton}
+            onPressIn={handleSubmit(onSubmit)}
+            onPressOut={toggleModal}
+            >
+            <Text style={styles.submitButtonText}>Submit</Text>
+            </Pressable>
             </View>
         </ScrollView>
     )

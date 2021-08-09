@@ -3,25 +3,25 @@ import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 
-export default function EmployeeCards({item}) {
+export default function EmployeeCards({ employee }) {
 
     return (
         <View style={styles.cards}>
                     <View  style={styles.cardTop}>
-                    <Text style={styles.cardTopTitle}>{item.name}</Text>
+                    <Text style={styles.cardTopTitle}>{employee.employeeName}</Text>
                     </View>
                     <View style={styles.cardBottom}>
                         <View style={styles.cardBottomGroup}>
                             <Text style={styles.cardBottomGroupTextCategory}>Type</Text>
-                            <Text style={styles.cardBottomGroupText}>{item.type}</Text>
+                            <Text style={styles.cardBottomGroupText}>{employee.type}</Text>
                         </View>
                         <View style={styles.cardBottomGroup}>
                             <Text style={styles.cardBottomGroupTextCategory}>Hours</Text>
-                            <Text style={styles.cardBottomGroupText}>{item.hours}</Text>
+                            <Text style={styles.cardBottomGroupText}>{employee.employeeHours}</Text>
                         </View>
                         <View style={styles.cardBottomGroup}>
                             <Text style={styles.cardBottomGroupTextCategory}>Tipout</Text>
-                            <Text style={styles.cardBottomGroupText}>{item.tipout}</Text>
+                            <Text style={styles.cardBottomGroupText}>?</Text>
                         </View>
                        
                     </View>

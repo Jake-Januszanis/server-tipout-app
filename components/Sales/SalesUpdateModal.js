@@ -19,7 +19,7 @@ export default function SalesUpdateModal({isOpen, toggleModal}) {
             >
             <Text style={styles.modalButtonText}>[Close]</Text>
             </Pressable>
-            <SalesUpdateForm />
+            <SalesUpdateForm toggleModal={toggleModal}/>
             </View>
         </Modal>
     </View>

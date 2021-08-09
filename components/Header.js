@@ -1,22 +1,27 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CurrentDate from './Utility/CurrentDate';
 import { LinearGradient } from 'expo-linear-gradient';
+import { SalesContext } from '../Context/SalesContext';
 
 export default function Header() {
+    const { salesState } = useContext(SalesContext);
+
+
+   let totalSales = salesState.find(item => item.title === 'Total Sales')
 
     return(
-        <View style={styles.container}>
+        <View>
             <LinearGradient
                 colors={['#77DBC9', 'transparent']}
                 style={styles.background}
             >
             <View style={styles.container}>
-            <Text style={styles.title}>Recess Tip Log</Text>
-            <CurrentDate />
-            <Text style={styles.text}>Total Sales:</Text>
-            <Text style={styles.totalDisplay}>$1,654.50</Text>
+                <Text style={styles.title}>Recess Tip Log</Text>
+                <CurrentDate />
+                <Text style={styles.text}>Total Sales:</Text>
+                {(totalSales !== undefined) ? <Text style={styles.totalDisplay}>${totalSales.value}</Text> : <Text style={styles.totalDisplay}>$0</Text>}
             </View>
             </LinearGradient>
             </View>

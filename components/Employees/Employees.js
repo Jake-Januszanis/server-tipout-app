@@ -1,10 +1,12 @@
 
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, Button} from 'react-native';
+import React, {useState, useContext} from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Button } from 'react-native';
 import AddEmployeeModal from './AddEmployeeModal';
 import EmployeeCards from './EmployeeCards';
+import { EmployeeContext } from '../../Context/EmployeeContext';
 
 export default function Employees() {
+    const { employees } = useContext(EmployeeContext);
 
     const [isOpen, setToggle] = useState(false)
 
@@ -12,55 +14,14 @@ export default function Employees() {
         setToggle(!isOpen)
     }
 
-    const data = [
-        {
-            name: 'Tucker',
-            type: 'support',
-            hours: 7.5,
-            tipout: '$24.00'
-        },
-        {
-            name: 'Chris',
-            type: 'support',
-            hours: 7.5,
-            tipout: '$24.00'
-        },
-        {
-            name: 'Shane',
-            type: 'support',
-            hours: 6.5,
-            tipout: '$18.00'
-        },
-        {
-            name: 'Justin',
-            type: 'support',
-            hours: 6.5,
-            tipout: '$18.00'
-        },
-        {
-            name: 'Casey',
-            type: 'host',
-            hours: 6.5,
-            tipout: '$7.00'
-        },
-        {
-            name: 'Sam',
-            type: 'host',
-            hours: 6.5,
-            tipout: '$7.00'
-        }
-    ]
-
 
     return (
     <View style={styles.container}>
         <SafeAreaView>
             <Text style={styles.title}>Employees</Text>
-                <FlatList
-                    data={data}
-                    renderItem = {({ item }) => (
-                    <EmployeeCards item={item} />
-                    )}/>
+            {employees.map((employee, index)=> {
+                return <EmployeeCards key={index}employee={employee} />
+            })}
             <View style={styles.addBtn}>
                 <Button 
                 title="Add Employee"

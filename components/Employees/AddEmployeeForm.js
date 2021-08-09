@@ -1,64 +1,90 @@
-import React, {useState} from 'react';
-import {TextInput, View, Text, StyleSheet, Pressable, Button, ScrollView} from 'react-native'
+import React, {useState, useContext}  from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import {TextInput, View, Text, StyleSheet, Pressable, ScrollView} from 'react-native'
+import { EmployeeContext } from '../../Context/EmployeeContext';
 
-export default function NewEmployeeForm() {
-    const [name, setName] = useState('')
-    const [hours, setHours] = useState()
+export default function NewEmployeeForm({toggleModal}) {
+    const { employeeDispatch } = useContext(EmployeeContext);
+
+    const { handleSubmit, control, setValue, formState: {errors} } = useForm();
+    const onSubmit = data => employeeDispatch({type: 'addEmployee', payload: data});
     const [type, setType] = useState('')
+    
+      
+    
+
+   
 
   return (
       <ScrollView>
       <View style={styles.container}>
         <Text style={styles.title}>New Employee</Text>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Name:</Text>
-                <TextInput
-                    autoFocus
-                    style={styles.input}
-                    textAlign= 'center'
-                    onChangeText={text => setName(text)}
-                />
-            </View>
-
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Hours:</Text>
-                    <TextInput
-                        style={styles.input}
-                        textAlign= 'center'
-                        keyboardType= 'number-pad'
-                        onChangeText={text => setHours(text)}
-                     />
-            </View>
-    {/* ***Created modified radio buttons using Pressable. Notes:
-    -OnPress will set state 
-    -Used ternery operator to update text styles based on user selection
-    (Ex: (type === 'support') ? {...styles.radio, ...styles.radioSelect} : styles.radio}) */}
-
         <View style={styles.inputGroup}>
-                <View style={styles.radioGroup}>
-                    <Pressable
-                        onPressIn={() => setType('support')}
-                    >
-                    <Text style={(type === 'support') ? {...styles.radioButton, ...styles.radioButtonSelect} : styles.radioButton}>Support</Text>
-                    </Pressable>
+            <Text style={styles.label}>Name</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="employeeName"
+                    id='employeeName'
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='default'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.totalSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
 
-                    <Pressable
-                        onPressIn={() => setType('host')}
-                    >
-                    <Text style={(type === 'host') ? {...styles.radioButton, ...styles.radioButtonSelect} : styles.radioButton}>Host</Text>
-                    </Pressable>
-                </View>
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Hours</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="employeeHours"
+                    id='employeeHours'
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.totalSales && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+            
+            <View style={styles.radioGroup}>
+       {/* *****Both pressable buttons use a ternery operator to determined the text style based off the value of type***** */}
+                <Pressable
+                    onPressIn={() => setValue('type', 'Support')}
+                    onPressOut={() => setType('Support')}
+                >
+                <Text style={(type === 'Support') ? {...styles.radioButton, ...styles.radioButtonSelect} : styles.radioButton}>Support</Text>
+                </Pressable>
+
+                <Pressable
+                    onPressIn={() => setValue('type', 'Host')}
+                    onPressOut={() => setType('Host')}
+                >
+                <Text style={(type === 'Host') ? {...styles.radioButton, ...styles.radioButtonSelect} : styles.radioButton}>Host</Text>
+            </Pressable>
         </View>
-        <Pressable
+            
+            <Pressable
             style={styles.submitButton}
-            onPressIn={() => console.log({
-                'Name': name,
-                'Type': type,
-                'Hours': hours,
-            })}
-        >
-        <Text style={styles.submitButtonText}>Submit</Text>
-        </Pressable>
+            onPressIn={handleSubmit(onSubmit)}
+            onPressOut={toggleModal}
+            >
+            <Text style={styles.submitButtonText}>Submit</Text>
+            </Pressable>
     </View>
     </ScrollView>
   );
@@ -127,5 +153,3 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     }
 })
-
-

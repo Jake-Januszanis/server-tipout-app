@@ -1,64 +1,101 @@
 
-import React, {useState} from 'react';
-import {Text, View, Pressable, ScrollView, StyleSheet, TextInput} from 'react-native';
+import React, { useContext } from 'react';
+import {Text, View, Pressable, ScrollView, StyleSheet, TextInput, Button} from 'react-native';
+import { useForm, Controller } from "react-hook-form";
+import { TipsContext } from '../../Context/TipsContext';
 
-export default function TipsUpdateForm() {
-    const [hours, setHours] = useState();
-    const [cardTips, setCardTips] = useState();
-    const [cashInHand, setCashInHand] = useState();
-    const [cashOwed, setCashOwed] = useState();
 
+export default function TipsUpdateForm({toggleModal}) {
+    const { tipsDispatch } = useContext(TipsContext);
+
+    const { handleSubmit, control, formState: {errors} } = useForm();
+    const onSubmit = data => {
+        tipsDispatch({type: 'addTips', payload: data})
+        }
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Text style={styles.title}>Edit Tips</Text>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Card Tips</Text>
-                            <TextInput
-                                autoFocus
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setCardTips(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Cash in Hand</Text>
-                            <TextInput
-                                style={styles.input}
-                                textAlign= 'center'
-                                keyboardType= 'number-pad'
-                                onChangeText={text => setCashInHand(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Cash Owed</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setCashOwed(text)}
-                            />
-                    </View>
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Hours</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType= 'number-pad'
-                                textAlign= 'center'
-                                onChangeText={text => setHours(text)}
-                            />
-                    </View>
-                    <Pressable
-                        style={styles.submitButton}
-                        onPressIn={() => console.log({
-                            'Hours': hours,
-                            'Card Tips': cardTips,
-                            'Cash in Hand': cashInHand,
-                            'Cash Owed': cashOwed
-                        })}>
-                        <Text style={styles.submitButtonText}>Update</Text>
-                    </Pressable>
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Card Tips</Text>
+                <Controller
+                    control={control}
+                    style={styles.inputGroup}
+                    rules={{required: true}}
+                    name="cardTips"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.cardTips && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Cash in Hand</Text>
+                <Controller
+                    control={control}
+                    rules={{required: true}}
+                    name="cashInHand"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.cashInHand && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Cash Owed</Text>
+                <Controller
+                    control={control}
+                    rules={{required: true}}
+                    name="cashOwed"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.cashOwed && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+
+            <View style={styles.inputGroup}>
+            <Text style={styles.label}>Hours</Text>
+                <Controller
+                    control={control}
+                    rules={{required: true}}
+                    name="hours"
+                    defaultValue=""
+                    render={({ field: { onChange, value } }) => (
+                        <TextInput
+                            style={styles.input}
+                            keyboardType='number-pad'
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                />
+                {errors.hours && <Text style={styles.inputErrorText}>This is required.</Text>}
+            </View>
+                <Pressable
+                    style={styles.submitButton}
+                    onPressIn={handleSubmit(onSubmit)}
+                    onPressOut={toggleModal}>
+                        <Text style={styles.submitButtonText}>Submit</Text>
+                </Pressable>
+
             </View>
         </ScrollView>
     )
@@ -91,6 +128,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         color: '#fff',
         fontSize: 35,
+    },
+    inputErrorText: {
+        color: 'red'
     },
     submitButton: {
         backgroundColor: '#77DBC9',

@@ -19,7 +19,7 @@ export default function AddEmployeeModal({isOpen, toggleModal}) {
                         onPressIn={toggleModal}>
                             <Text style={styles.modalButtonText}>[Close]</Text>
                     </Pressable>
-                <NewEmployeeForm />
+                <NewEmployeeForm toggleModal={toggleModal}/>
             </View>
         </Modal>
     </View>

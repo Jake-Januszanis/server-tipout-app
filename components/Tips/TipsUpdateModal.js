@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, Text, StyleSheet, Modal, Button, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Modal, Pressable} from 'react-native';
 import TipsUpdateForm from './TipsUpdateForm';
 
 
@@ -20,7 +20,7 @@ export default function TipsUpdateModal({isOpen, toggleModal}) {
                 >
                 <Text style={styles.modalButtonText}>[Close]</Text>
                 </Pressable>
-                <TipsUpdateForm />
+                <TipsUpdateForm toggleModal={toggleModal}/>
             </View>
             </Modal>
         </View>

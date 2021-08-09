@@ -1,36 +1,22 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
+import { SalesContext } from '../../Context/SalesContext';
+import SalesUpdateBtn from './SalesUpdateBtn'
 
 export default function SalesCards() {
-
-    const data = [
-        {
-            title: 'Liqour Sales',
-            value: '$1,212',
-            id: '1'
-        },
-        {
-            title: 'Food Sales',
-            value: '$442.00',
-            id: '2'
-        },
-        {
-            title: 'Hours',
-            value: 6.5,
-            id: '3'
-        },
-    ]
-
+    const { salesState } = useContext(SalesContext)
+    
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={data}
+                data={salesState}
                 horizontal
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.key.toString()}
+                ListEmptyComponent={<SalesUpdateBtn />}
                 renderItem={({ item }) => {
-                    return <View style={styles.card}>
+                    return <View style={styles.card} key={item.key}>
                         <Text style={styles.text}>{item.title}</Text>
                         <Text style={styles.text}>{item.value}</Text>
                     </View>

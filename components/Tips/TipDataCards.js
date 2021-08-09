@@ -1,40 +1,25 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { TipsContext } from '../../Context/TipsContext';
+import TipsUpdateBtn from './TipsUpdateBtn';
 
 export default function TipDataCards() {
-
-    const tipData = [
-        {
-            name: 'Total Tips',
-            value: '$381.64'
-        },
-        {
-            name: 'Card Tips',
-            value: '$362.11'
-        },
-        {
-            name: 'Cash',
-            value: '$50.00'
-        },{
-            name: 'Cash Owed',
-            value: '$30.47'
-        },{
-            name: 'Cash Tips',
-            value: '$19.53'
-        },
-    ]
-
+    const { tipsState } = useContext(TipsContext)
+   
     return (
         <View style={styles.container}>
             <FlatList 
-            data={tipData}
+            data={tipsState}
             horizontal
             nestedScrollEnabled
+            keyExtractor={(item) => item.key.toString()}
+            ListEmptyComponent={<TipsUpdateBtn />}
             renderItem = {({ item }) => (
-                        <View style={styles.cards}>
-                            <Text style={styles.text}>{item.name}</Text>
+                        <View style={styles.cards} key={item.key.toString()}>
+                            <Text style={styles.text}>{item.title}</Text>
                             <Text style={styles.text}>{item.value}</Text>
+
                         </View>
             )}/>
         </View>
